@@ -9,3 +9,4 @@ aws-mfa is a tool to create temporary session tokens using MFA devices.
 - [ ] How to use
 - [ ] dep libs
 - [ ] distribution
+- [ ] Makefile
