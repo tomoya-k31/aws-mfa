@@ -1,4 +1,4 @@
-package sts
+package awsmfa
 
 import (
 	"fmt"
