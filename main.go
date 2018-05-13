@@ -6,7 +6,7 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/tomoya-k31/aws-sts-auth/aws"
+	"github.com/tomoya-k31/aws-sts-auth/sts"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
@@ -15,8 +15,8 @@ var (
 	region    string
 	tokenCode string
 
-	awsIni         *aws.AwsIni
-	awsIniSettings *aws.AwsIniSettings
+	awsIni         *sts.AwsIni
+	awsIniSettings *sts.AwsIniSettings
 )
 
 func init() {
@@ -28,7 +28,7 @@ func init() {
 	flag.StringVar(&tokenCode, "token-code", "", "The value provided by the MFA device")
 	flag.Parse()
 
-	awsIni = aws.NewAwsIni()
+	awsIni = sts.NewAwsIni()
 	awsIniSettings = awsIni.Load(profile)
 	if region == "" {
 		if awsIniSettings.Region != "" {
@@ -67,7 +67,7 @@ func main() {
 		return
 	}
 
-	token, err := aws.StsAuth(&aws.StsConfig{
+	token, err := sts.StsAuth(&sts.StsConfig{
 		Region:          region,
 		Profile:         profile,
 		DurationSeconds: 3600, // 1h
